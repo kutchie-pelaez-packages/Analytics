@@ -3,8 +3,6 @@ import CoreUtils
 import Foundation
 import os
 
-private let logger = Logger("analytics")
-
 final class AnalyticsTrackerImpl:
     StartableProvider,
     AnalyticsTracker
@@ -15,6 +13,14 @@ final class AnalyticsTrackerImpl:
     }
 
     private let engines: [AnalyticsTracker]
+
+    private var enginesAndLogger: [AnalyticsTracker] {
+        [loggerEngine] + engines
+    }
+
+    private lazy var loggerEngine: AnalyticsTracker = {
+        AnalyticsLoggerEngine(enginesDescription: enginesDescription)
+    }()
 
     private var enginesDescription: String {
         engines
@@ -31,27 +37,23 @@ final class AnalyticsTrackerImpl:
     // MARK: - CustomStringConvertible
 
     var description: String {
-        "Analytics Tracker with [\(enginesDescription)] engines"
+        if enginesDescription.isEmpty {
+            return "Empty Analytics Tracker"
+        } else {
+            return "Analytics Tracker with [\(enginesDescription)] engines"
+        }
     }
 
     // MARK: - AnalyticsTracker
 
     func track(_ event: AnalyticsEvent) {
-        var message = "Tracking \"\(event.name)\" to \(self.enginesDescription)"
-        if event.parameters.isNotEmpty {
-            message += " - \(event.parameters)"
-        }
-        logger.log("\(message)")
-
-        engines.forEach {
+        enginesAndLogger.forEach {
             $0.track(event)
         }
     }
 
     func track(_ userProperties: AnalyticsUserProperties) {
-        logger.log("Tracking \(userProperties) to \(self.enginesDescription)")
-
-        engines.forEach {
+        enginesAndLogger.forEach {
             $0.track(userProperties)
         }
     }
