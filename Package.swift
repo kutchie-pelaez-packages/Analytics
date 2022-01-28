@@ -8,8 +8,18 @@ let package = Package(
         .iOS("15")
     ],
     products: [
-        .library(name: "AnalyticsTracker", targets: ["AnalyticsTracker"]),
-        .library(name: "AnalyticsEvent", targets: ["AnalyticsEvent"])
+        .library(
+            name: "AnalyticsTracker",
+            targets: [
+                 "AnalyticsTracker"
+            ]
+        ),
+        .library(
+            name: "AnalyticsEvent", 
+            targets: [
+                "AnalyticsEvent"
+            ]
+        )
     ],
     dependencies: [
         .package(name: "Core", url: "https://github.com/kutchie-pelaez-packages/Core.git", .branch("master"))
