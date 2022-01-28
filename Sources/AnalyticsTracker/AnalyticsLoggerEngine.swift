@@ -1,5 +1,5 @@
 import AnalyticsEvent
-import CoreUtils
+import Core
 import os
 
 private let logger = Logger("analytics")

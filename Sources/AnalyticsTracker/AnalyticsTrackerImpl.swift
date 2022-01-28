@@ -1,5 +1,5 @@
 import AnalyticsEvent
-import CoreUtils
+import Core
 import Foundation
 import os
 

@@ -1,4 +1,4 @@
-import CoreUtils
+import Core
 
 public struct AnalyticsTrackerFactory {
     public init() { }

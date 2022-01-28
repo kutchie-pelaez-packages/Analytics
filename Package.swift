@@ -12,13 +12,13 @@ let package = Package(
         .library(name: "AnalyticsEvent", targets: ["AnalyticsEvent"])
     ],
     dependencies: [
-        .package(name: "CoreUtils", url: "https://github.com/kutchie-pelaez-packages/CoreUtils", .branch("master"))
+        .package(name: "Core", url: "https://github.com/kutchie-pelaez-packages/Core", .branch("master"))
     ],
     targets: [
         .target(
             name: "AnalyticsTracker",
             dependencies: [
-                .product(name: "CoreUtils", package: "CoreUtils"),
+                .product(name: "Core", package: "Core"),
                 .target(name: "AnalyticsEvent")
             ]
         ),

@@ -1,5 +1,5 @@
 import AnalyticsEvent
-import CoreUtils
+import Core
 
 public protocol AnalyticsTracker:
     Startable,
