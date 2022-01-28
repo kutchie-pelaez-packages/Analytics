@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "AnalyticsTracker",
+    name: "Analytics",
     platforms: [
         .iOS("15")
     ],
