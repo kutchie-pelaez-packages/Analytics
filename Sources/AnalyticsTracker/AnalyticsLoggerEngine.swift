@@ -1,14 +1,17 @@
 import AnalyticsEvent
 import Core
-import os
-
-private let logger = Logger("analytics")
+import Logger
 
 final class AnalyticsLoggerEngine: AnalyticsTracker {
-    init(enginesDescription: String) {
+    init(
+        logger: Logger,
+        enginesDescription: String
+    ) {
+        self.logger = logger
         self.enginesDescription = enginesDescription
     }
 
+    private let logger: Logger
     private let enginesDescription: String
 
     // MARK: - Startable
@@ -21,17 +24,21 @@ final class AnalyticsLoggerEngine: AnalyticsTracker {
         "Analytics Logger"
     }
 
-    // MARK: - CustomStringConvertible
+    // MARK: - AnalyticsTracker
 
     func track(_ event: AnalyticsEvent) {
         var message = "Tracking \"\(event.name)\" to \(self.enginesDescription)"
         if event.parameters.isNotEmpty {
             message += " - \(event.parameters)"
         }
-        logger.log("\(message)")
+        logger.log(message, domain: .analytics)
     }
 
     func track(_ userProperties: AnalyticsUserProperties) {
-        logger.log("Tracking \(userProperties) to \(self.enginesDescription)")
+        logger.log("Tracking \(userProperties) to \(self.enginesDescription)", domain: .analytics)
     }
+}
+
+extension LogDomain {
+    fileprivate static let analytics: Self = "analytics"
 }

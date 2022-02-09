@@ -1,25 +1,29 @@
 import AnalyticsEvent
 import Core
 import Foundation
-import os
+import Logger
 
-final class AnalyticsTrackerImpl:
-    StartableProvider,
-    AnalyticsTracker
-{
-
-    init(engines: [AnalyticsTracker]) {
+final class AnalyticsTrackerImpl: StartableProvider, AnalyticsTracker {
+    init(
+        engines: [AnalyticsTracker],
+        logger: Logger
+    ) {
         self.engines = engines
+        self.logger = logger
     }
 
     private let engines: [AnalyticsTracker]
+    private let logger: Logger
 
     private var enginesAndLogger: [AnalyticsTracker] {
         [loggerEngine] + engines
     }
 
     private lazy var loggerEngine: AnalyticsTracker = {
-        AnalyticsLoggerEngine(enginesDescription: enginesDescription)
+        AnalyticsLoggerEngine(
+            logger: logger,
+            enginesDescription: enginesDescription
+        )
     }()
 
     private var enginesDescription: String {
