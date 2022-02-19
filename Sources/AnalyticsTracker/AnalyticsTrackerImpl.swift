@@ -3,7 +3,7 @@ import Core
 import Foundation
 import Logger
 
-final class AnalyticsTrackerImpl: StartableProvider, AnalyticsTracker {
+final class AnalyticsTrackerImpl: AnalyticsTracker {
     init(
         engines: [AnalyticsTracker],
         logger: Logger
@@ -32,10 +32,10 @@ final class AnalyticsTrackerImpl: StartableProvider, AnalyticsTracker {
             .joined(separator: ", ")
     }
 
-    // MARK: - StartableProvider
+    // MARK: - Startable
 
-    var startable: Startable {
-        Startables(from: engines)
+    func start() {
+        engines.forEach { $0.start() }
     }
 
     // MARK: - CustomStringConvertible
