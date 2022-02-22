@@ -32,12 +32,6 @@ final class AnalyticsTrackerImpl: AnalyticsTracker {
             .joined(separator: ", ")
     }
 
-    // MARK: - Startable
-
-    func start() {
-        engines.forEach { $0.start() }
-    }
-
     // MARK: - CustomStringConvertible
 
     var description: String {
