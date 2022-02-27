@@ -1,6 +1,7 @@
 public enum AnalyticsAction: RawRepresentable {
     case open
     case close
+    case perform
     case custom(String)
 
     public init?(rawValue: String) {
@@ -10,6 +11,9 @@ public enum AnalyticsAction: RawRepresentable {
 
         case Self.close.rawValue:
             self = .close
+
+        case Self.perform.rawValue:
+            self = .perform
 
         default:
             self = .custom(rawValue)
@@ -23,6 +27,9 @@ public enum AnalyticsAction: RawRepresentable {
 
         case .close:
             return "close"
+
+        case .perform:
+            return "perform"
 
         case let .custom(name):
             return name
