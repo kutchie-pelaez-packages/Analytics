@@ -4,16 +4,16 @@ import Foundation
 public struct AnalyticsEvent {
     public init(
         name: String,
-        parameters: [String: Any]
+        parameters: [String: Any?]
     ) {
         self.name = name
-        self.parameters = parameters
+        self.parameters = parameters.excludingNilValues
     }
 
     public init(
         domain: AnalyticsDomain,
         name: String,
-        parameters: [String : Any] = [:]
+        parameters: [String : Any?] = [:]
     ) {
         let fullname = domain.rawValue
             .camelCaseChunks
@@ -31,7 +31,7 @@ public struct AnalyticsEvent {
     public init(
         domain: AnalyticsDomain,
         action: AnalyticsAction,
-        parameters: [String : Any] = [:]
+        parameters: [String : Any?] = [:]
     ) {
         let name = action.rawValue
             .camelCaseChunks
