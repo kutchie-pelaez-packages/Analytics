@@ -34,6 +34,11 @@ let package = Package(
                 .target(name: "AnalyticsEvent")
             ]
         ),
-        .target(name: "AnalyticsEvent")
+        .target(
+            name: "AnalyticsEvent",
+            dependencies: [
+                .product(name: "Core", package: "Core")
+            ]
+        )
     ]
 )
