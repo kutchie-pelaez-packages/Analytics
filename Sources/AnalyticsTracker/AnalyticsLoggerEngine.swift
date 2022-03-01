@@ -3,10 +3,13 @@ import Core
 import Logger
 
 final class AnalyticsLoggerEngine: AnalyticsTracker {
-    init(
+    init?(
+        environment: Environment,
         logger: Logger,
         enginesDescription: String
     ) {
+        guard environment.isDev else { return nil }
+
         self.logger = logger
         self.enginesDescription = enginesDescription
     }
@@ -27,15 +30,15 @@ final class AnalyticsLoggerEngine: AnalyticsTracker {
     // MARK: - AnalyticsTracker
 
     func track(_ event: AnalyticsEvent) {
-        var message = "Tracking \"\(event.name)\" to \(self.enginesDescription)"
+        var message = "Tracking \"\(event.name)\" to \(self.enginesDescription)..."
         if event.parameters.isNotEmpty {
-            message += " - \(event.parameters)"
+            message += " Parameters: \(event.parameters)"
         }
         logger.log(message, domain: .analytics)
     }
 
     func track(_ userProperties: AnalyticsUserProperties) {
-        logger.log("Tracking \(userProperties) to \(self.enginesDescription)", domain: .analytics)
+        logger.log("Tracking \(userProperties) to \(self.enginesDescription...)", domain: .analytics)
     }
 }
 

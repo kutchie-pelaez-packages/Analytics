@@ -5,22 +5,26 @@ import Logger
 
 final class AnalyticsTrackerImpl: AnalyticsTracker {
     init(
+        environment: Environment,
         engines: [AnalyticsTracker],
         logger: Logger
     ) {
+        self.environment = environment
         self.engines = engines
         self.logger = logger
     }
 
+    private let environment: Environment
     private let engines: [AnalyticsTracker]
     private let logger: Logger
 
     private var enginesAndLogger: [AnalyticsTracker] {
-        [loggerEngine] + engines
+        [loggerEngine].unwrapped() + engines
     }
 
-    private lazy var loggerEngine: AnalyticsTracker = {
+    private lazy var loggerEngine: AnalyticsTracker? = {
         AnalyticsLoggerEngine(
+            environment: environment,
             logger: logger,
             enginesDescription: enginesDescription
         )
