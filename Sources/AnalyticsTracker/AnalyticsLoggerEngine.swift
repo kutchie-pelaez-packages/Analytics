@@ -23,9 +23,7 @@ final class AnalyticsLoggerEngine: AnalyticsTracker {
 
     // MARK: - CustomStringConvertible
 
-    var description: String {
-        "Analytics Logger"
-    }
+    var description: String { "Analytics Logger" }
 
     // MARK: - AnalyticsTracker
 
