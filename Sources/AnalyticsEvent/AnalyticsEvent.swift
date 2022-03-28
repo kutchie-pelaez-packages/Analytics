@@ -7,7 +7,7 @@ public struct AnalyticsEvent {
         parameters: [String: Any?]
     ) {
         self.name = name
-        self.parameters = parameters.excludingNilValues()
+        self.parameters = parameters.unwrapped()
     }
 
     public init(
