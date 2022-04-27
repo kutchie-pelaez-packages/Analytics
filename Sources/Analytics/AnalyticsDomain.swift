@@ -1,13 +1,13 @@
 public struct AnalyticsDomain: ExpressibleByStringLiteral, CustomStringConvertible {
-    let rawValue: String
+    public let name: String
 
     // MARK: - ExpressibleByStringLiteral
 
     public init(stringLiteral value: StringLiteralType) {
-        self.rawValue = value
+        self.name = value
     }
 
     // MARK: - CustomStringConvertible
 
-    public var description: String { rawValue }
+    public var description: String { name }
 }

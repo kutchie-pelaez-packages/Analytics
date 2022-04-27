@@ -2,6 +2,9 @@ import Core
 import Foundation
 
 public struct AnalyticsEvent {
+    public let name: String
+    public let parameters: [String: Any]
+
     public init(
         name: String,
         parameters: [String: Any?]
@@ -15,7 +18,7 @@ public struct AnalyticsEvent {
         name: String,
         parameters: [String : Any?] = [:]
     ) {
-        let fullname = domain.rawValue
+        let fullname = domain.name
             .camelCaseChunks
             .map(\.capitalized)
             .joined(separator: " ") +
@@ -44,7 +47,4 @@ public struct AnalyticsEvent {
             parameters: parameters
         )
     }
-
-    public let name: String
-    public let parameters: [String: Any]
 }

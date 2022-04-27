@@ -9,15 +9,15 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "AnalyticsTracker",
+            name: "AnalyticsTrackerImpl",
             targets: [
-                 "AnalyticsTracker"
+                 "AnalyticsTrackerImpl"
             ]
         ),
         .library(
-            name: "AnalyticsEvent", 
+            name: "Analytics",
             targets: [
-                "AnalyticsEvent"
+                "Analytics"
             ]
         )
     ],
@@ -27,15 +27,15 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "AnalyticsTracker",
+            name: "AnalyticsTrackerImpl",
             dependencies: [
                 .product(name: "Core", package: "Core"),
                 .product(name: "Logger", package: "Logging"),
-                .target(name: "AnalyticsEvent")
+                .target(name: "Analytics")
             ]
         ),
         .target(
-            name: "AnalyticsEvent",
+            name: "Analytics",
             dependencies: [
                 .product(name: "Core", package: "Core")
             ]

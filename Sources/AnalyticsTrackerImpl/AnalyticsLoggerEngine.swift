@@ -1,8 +1,11 @@
-import AnalyticsEvent
+import Analytics
 import Core
 import Logger
 
 final class AnalyticsLoggerEngine: AnalyticsTracker {
+    private let logger: Logger
+    private let enginesDescription: String
+
     init?(
         environment: Environment,
         logger: Logger,
@@ -13,13 +16,6 @@ final class AnalyticsLoggerEngine: AnalyticsTracker {
         self.logger = logger
         self.enginesDescription = enginesDescription
     }
-
-    private let logger: Logger
-    private let enginesDescription: String
-
-    // MARK: - Startable
-
-    func start() { }
 
     // MARK: - CustomStringConvertible
 
@@ -40,6 +36,6 @@ final class AnalyticsLoggerEngine: AnalyticsTracker {
     }
 }
 
-extension LogDomain {
-    fileprivate static let analytics: Self = "analytics"
+extension LoggingDomain {
+    fileprivate static let analytics: LoggingDomain = "analytics"
 }

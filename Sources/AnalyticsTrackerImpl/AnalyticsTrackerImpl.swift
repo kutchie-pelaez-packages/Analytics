@@ -1,19 +1,9 @@
-import AnalyticsEvent
+import Analytics
 import Core
 import Foundation
 import Logger
 
 final class AnalyticsTrackerImpl: AnalyticsTracker {
-    init(
-        environment: Environment,
-        engines: [AnalyticsTracker],
-        logger: Logger
-    ) {
-        self.environment = environment
-        self.engines = engines
-        self.logger = logger
-    }
-
     private let environment: Environment
     private let engines: [AnalyticsTracker]
     private let logger: Logger
@@ -34,6 +24,16 @@ final class AnalyticsTrackerImpl: AnalyticsTracker {
         engines
             .map(\.description)
             .joined(separator: ", ")
+    }
+
+    init(
+        environment: Environment,
+        engines: [AnalyticsTracker],
+        logger: Logger
+    ) {
+        self.environment = environment
+        self.engines = engines
+        self.logger = logger
     }
 
     // MARK: - CustomStringConvertible
